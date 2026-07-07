@@ -20,12 +20,16 @@
       }
     </script>
     <style>
-      /* Fluidné zväčšovanie pre veľké monitory (nad 1600px) */
-      @media (min-width: 1600px) {
+      /* Inteligentné dynamické škálovanie pre notebooky a monitory (nad 1024px) */
+      @media (min-width: 1024px) {
           html {
-              /* Plynule zväčšuje veľkosť v závislosti od šírky okna (1vw), 
-                 no zastropuje ju podľa výšky (1.8vh), aby si zabránil vertikálnemu scrollovaniu */
-              font-size: min(1vw, 1.8vh); 
+              /* 
+                 Vyberie menšiu hodnotu: buď 0.85% šírky obrazovky (vw) alebo 1.6% výšky (vh).
+                 Vďaka tomu to nepretečie vertikálne ani na širokouhlých, no nízkych displejoch.
+                 Clamp() udržuje text medzi bezpečnou hranicou 14px (čitateľné na notebooku) 
+                 a 32px (na 4K monitoroch).
+              */
+              font-size: clamp(14px, min(0.85vw, 1.6vh), 32px); 
           }
       }
 
